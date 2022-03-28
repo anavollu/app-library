@@ -1,4 +1,15 @@
 <script>
+  import axios from 'axios';
+  let email = '';
+  let password = '';
+
+  function logging() {
+    console.log('loggin');
+    axios.post('http://localhost:3000/api/librarian/login', {
+      email,
+      password,
+    });
+  }
 </script>
 
 <main>
@@ -7,14 +18,14 @@
       <p class="login-title">Welcome back</p>
       <p class="login-subtitle">Login to your account</p>
     </div>
-    <form class="form" action="post">
-      <input type="text" id="email" placeholder="E-mail" />
-      <input type="password" id="password" placeholder="Password" />
+    <form class="form" on:submit|preventDefault={logging}>
+      <input bind:value={email} class="input" type="text" id="email" placeholder="E-mail" />
+      <input bind:value={password} class="input" type="password" id="password" placeholder="Password" />
       <div class="remember-wrapper">
-        <input type="checkbox" id="remember-me" />
+        <input class="checkbox" type="checkbox" id="remember-me" />
         <label for="remember-me">Remember me</label>
       </div>
-      <input type="button" class="button" value="Sign in" />
+      <button type="submit" class="button">Sign in</button>
     </form>
   </div>
 </main>
@@ -34,8 +45,7 @@
   }
 
   .login-box {
-    height: 45vh;
-    width: 25vw;
+    width: min(80vw, 400px);
     background-color: white;
     margin: auto;
     padding: 30px;
@@ -61,15 +71,14 @@
     margin-top: 30px;
   }
 
-  input {
+  .input {
     font-size: 12px;
     line-height: 18px;
     color: #b9b9b9;
     padding-left: 15px;
-    display: flex;
     border-radius: 5px;
     height: 40px;
-    width: 290px;
+    width: 100%;
   }
 
   .remember-wrapper {
@@ -82,15 +91,21 @@
     margin-top: 23px;
   }
 
+  .checkbox {
+    margin: 0;
+    padding: 0;
+  }
+
   .button {
-    display: flex;
-    position: absolute;
-    margin-top: 23px;
+    margin: 23px auto 0;
+    padding: 0 50px;
     background-color: #ea5f76;
     color: white;
     font-weight: 700;
     font-size: 12px;
-    line-height: 18px;
+    height: 40px;
     border-radius: 5px;
+    text-align: center;
+    display: block;
   }
 </style>
